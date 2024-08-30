@@ -258,6 +258,55 @@ While our approach demonstrates strong results using only point coordinates, we 
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methodology</h2>
+        <img src="./static/images/method.jpg" class="teaser-fig" alt="Methodology of P2P-Bridge." />
+        <div class="content has-text-justified">
+          <p>
+            Methodology of P2P-Bridge, modeling point cloud denoising as a reverse data-to-
+            data diffusion process. Our model can effectively transform noisy data into cleaner data
+            by learning a bridge between clean and noisy data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Exp. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Results</h2>
+        <h3 class="title is-4">Object-Level Denoising</h3>
+        <img src="./static/images/qualitative_punet.PNG" class="teaser-fig" alt="teaser-fig.">
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison of our P2P-Bridge with recent deep-learning-based point
+            cloud denoising methods on the PU-Net dataset under 3% isotropic Gaussian noise.
+          </p>
+        </div>
+
+
+        <h3 class="title is-4">Szene-Level Denoising</h3>
+        <img src="./static/images/qualitative_indoor.PNG" class="teaser-fig" alt="teaser-fig.">
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison on the ScanNet++ dataset (top 3 rows) and the
+            ARKitScenes dataset (bottom 2 rows) using noisy iPhone scans as input. P2P-Bridge
+            effectively removes real-world noise
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Exp. -->
+  </div>
+</section>
+
 <!-- <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
