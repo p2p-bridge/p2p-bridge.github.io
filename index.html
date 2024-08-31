@@ -75,56 +75,88 @@
     </div>
   </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            In this work, we tackle the task of point cloud denoising through a novel framework that adapts Diffusion
-            Schrödinger bridges to points clouds.
-            Unlike previous approaches that predict point-wise displacements from point features or learned noise
-            distributions,
-            our method learns an optimal transport plan between paired point clouds.
-            Experiments on object datasets like PU-Net and real-world datasets such as ScanNet++ and ARKitScenes show
-            that \name{} achieves significant improvements over existing methods.
-            While our approach demonstrates strong results using only point coordinates, we also show that
-            incorporating additional features, such as color information or point-wise DINOv2 features, further
-            enhances the performance.
-          </p>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              In this work, we tackle the task of point cloud denoising through a novel framework that adapts Diffusion
+              Schrödinger bridges to points clouds.
+              Unlike previous approaches that predict point-wise displacements from point features or learned noise
+              distributions,
+              our method learns an optimal transport plan between paired point clouds.
+              Experiments on object datasets like PU-Net and real-world datasets such as ScanNet++ and ARKitScenes show
+              that P2P-Bridge achieves significant improvements over existing methods.
+              While our approach demonstrates strong results using only point coordinates, we also show that
+              incorporating additional features, such as color information or point-wise DINOv2 features, further
+              enhances the performance.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Methodology</h2>
-        <img src="./static/images/method.jpg" class="teaser-fig" alt="Methodology of P2P-Bridge." />
-        <div class="content has-text-justified">
-          <p>
-            Methodology of P2P-Bridge, modeling point cloud denoising as a reverse data-to-
-            data diffusion process. Our model can effectively transform noisy data into cleaner data
-            by learning a bridge between clean and noisy data.
-          </p>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Methodology</h2>
+          <img src="./static/images/method.jpg" class="teaser-fig" alt="Methodology of P2P-Bridge." />
+          <div class="content has-text-justified">
+            <p>
+              Methodology of P2P-Bridge, modeling point cloud denoising as a reverse data-to-
+              data diffusion process. Our model can effectively transform noisy data into cleaner data
+              by learning a bridge between clean and noisy data.
+            </p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Exp. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Results</h2>
+          <h3 class="title is-4">Object-Level Denoising</h3>
+          <img src="./static/images/qualitative_punet.PNG" class="teaser-fig" alt="teaser-fig.">
+          <div class="content has-text-justified">
+            <p>
+              Qualitative comparison of our P2P-Bridge with recent deep-learning-based point
+              cloud denoising methods on the PU-Net dataset under 3% isotropic Gaussian noise.
+            </p>
+          </div>
+
+
+          <h3 class="title is-4">Szene-Level Denoising</h3>
+          <img src="./static/images/qualitative_indoor.PNG" class="teaser-fig" alt="teaser-fig.">
+          <div class="content has-text-justified">
+            <p>
+              Qualitative comparison on the ScanNet++ dataset (top 3 rows) and the
+              ARKitScenes dataset (bottom 2 rows) using noisy iPhone scans as input. P2P-Bridge
+              effectively removes real-world noise
+            </p>
+          </div>
+          <!-- <img src="./static/images/room-denoise.gif" width="600" align="center"> -->
+        </div>
+      </div>
+      <!--/ Exp. -->
+    </div>
+  </section>
+
+  <div class="container">
+  <h3>Before and After Denoising</h3>
+  <div class="img-comp-container">
+    <div class="img-comp-img"><img src="static/images/after.jpg" width="800" height="600"></div>
+    <div class="img-comp-img img-comp-overlay"><img src="static/images/before.jpg" width="800" height="600"></div>
   </div>
-</section>
-
-<div align="center" style="margin: auto; display: block">
-<div class="img-comp-container">
-  <div class="img-comp-img"><img src="static/images/before.jpg" width="600" height="600"></div>
-  <div class="img-comp-img img-comp-overlay"><img src="static/images/after.jpg" width="600" height="600"></div>
-</div>
 </div>
 
-<section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column">
@@ -150,7 +182,6 @@
       </div>
     </div>
   </div>
-</section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
