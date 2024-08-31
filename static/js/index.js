@@ -1,78 +1,79 @@
-window.HELP_IMPROVE_VIDEOJS = false;
+function initComparisons() {
 
-var INTERP_BASE = "./static/interpolation/stacked";
-var NUM_INTERP_FRAMES = 240;
-
-var interp_images = [];
-function preloadInterpolationImages() {
-  for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
-    var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
-    interp_images[i] = new Image();
-    interp_images[i].src = path;
+  var x, i;
+  /* Find all elements with an "overlay" class: */
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /* Once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function: */
+    compareImages(x[i]);
   }
-}
-
-function setInterpolationImage(i) {
-  var image = interp_images[i];
-  image.ondragstart = function() { return false; };
-  image.oncontextmenu = function() { return false; };
-  $('#interpolation-image-wrapper').empty().append(image);
-}
-
-
-$(document).ready(function() {
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
-
-    });
-
-    var options = {
-			slidesToScroll: 1,
-			slidesToShow: 3,
-			loop: true,
-			infinite: true,
-			autoplay: false,
-			autoplaySpeed: 3000,
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /* Get the width and height of the img element */
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /* Set the width of the img element to 50%: */
+    img.style.width = (w / 2) + "px";
+    /* Create slider: */
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /* Insert slider */
+    img.parentElement.insertBefore(slider, img);
+    /* Position the slider in the middle: */
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /* Execute a function when the mouse button is pressed: */
+    slider.addEventListener("mousedown", slideReady);
+    /* And another function when the mouse button is released: */
+    window.addEventListener("mouseup", slideFinish);
+    /* Or touched (for touch screens: */
+    slider.addEventListener("touchstart", slideReady);
+     /* And released (for touch screens: */
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /* Prevent any other actions that may occur when moving over the image: */
+      e.preventDefault();
+      /* The slider is now clicked and ready to move: */
+      clicked = 1;
+      /* Execute a function when the slider is moved: */
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
     }
-
-		// Initialize all div with carousel class
-    var carousels = bulmaCarousel.attach('.carousel', options);
-
-    // Loop on each carousel initialized
-    for(var i = 0; i < carousels.length; i++) {
-    	// Add listener to  event
-    	carousels[i].on('before:show', state => {
-    		console.log(state);
-    	});
+    function slideFinish() {
+      /* The slider is no longer clicked: */
+      clicked = 0;
     }
-
-    // Access to bulmaCarousel instance of an element
-    var element = document.querySelector('#my-element');
-    if (element && element.bulmaCarousel) {
-    	// bulmaCarousel instance is available as element.bulmaCarousel
-    	element.bulmaCarousel.on('before-show', function(state) {
-    		console.log(state);
-    	});
+    function slideMove(e) {
+      var pos;
+      /* If the slider is no longer clicked, exit this function: */
+      if (clicked == 0) return false;
+      /* Get the cursor's x position: */
+      pos = getCursorPos(e)
+      /* Prevent the slider from being positioned outside the image: */
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /* Execute a function that will resize the overlay image according to the cursor: */
+      slide(pos);
     }
-
-    /*var player = document.getElementById('interpolation-video');
-    player.addEventListener('loadedmetadata', function() {
-      $('#interpolation-slider').on('input', function(event) {
-        console.log(this.value, player.duration);
-        player.currentTime = player.duration / 100 * this.value;
-      })
-    }, false);*/
-    preloadInterpolationImages();
-
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);
-    });
-    setInterpolationImage(0);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
-
-    bulmaSlider.attach();
-
-})
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /* Get the x positions of the image: */
+      a = img.getBoundingClientRect();
+      console.log(a);
+      /* Calculate the cursor's x coordinate, relative to the image: */
+      x = e.pageX - a.left;
+      /* Consider any page scrolling: */
+      // x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /* Resize the image: */
+      img.style.width = x + "px";
+      img.style.height = "600px";
+      /* Position the slider: */
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+} 
